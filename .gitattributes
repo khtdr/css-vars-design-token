@@ -1,2 +1,2 @@
-dist linguist-generated
-coverage linguist-documentation
+dist/** linguist-generated
+coverage/** linguist-documentation
