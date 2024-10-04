@@ -44,7 +44,7 @@ const path = require('path');
 // const path = require('path');
 
 module.exports = {
-  entry: './src/CssVars.tsx',
+  entry: './css-vars-design-token.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',

@@ -1,15 +1,15 @@
 {
-  "name": "css-vars",
-  "version": "1.0.0",
+  "name": "css-vars-design-token",
+  "version": "0.0.9",
   "main": "dist/bundle.js",
-  "types": "dist/CssVars.d.ts",
+  "types": "dist/css-vars-design-token.d.ts",
   "scripts": {
     "test": "jest",
     "build": "webpack --config webpack.config.js",
     "clean": "rm -rf dist",
     "demo": "http-server -p 8080 -o /demo.html",
-    "lint": "eslint --ignore-pattern coverage --ignore-pattern dist --ignore-pattern '**/*.test.*'",
-    "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
+    "lint": "eslint --ignore-pattern coverage --ignore-pattern dist --ignore-pattern '**/*test.*'",
+    "format": "prettier --write \"./*.{ts,tsx}\"",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },

@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { act, render } from '@testing-library/react';
 import {
   CssVarsProvider,
   useDesignToken,
   useThemeMode,
   toCssVars,
-} from './CssVars';
+} from './css-vars-design-token';
 
 describe('Function toCssVars', () => {
   test('toCssVars returns the expected flat list of css vars', () => {

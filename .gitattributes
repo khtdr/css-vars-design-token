@@ -1,6 +1,6 @@
 dist/** linguist-generated
 coverage/** linguist-documentation
-eslint.config.mjs linguist-vendor
-jest.config.js linguist-vendor
-webpack.config.js linguist-vendor
-vite.config.js linguist-vendor
+eslint.config.mjs linguist-vendored
+jest.config.js linguist-vendored
+webpack.config.js linguist-vendored
+vite.config.js linguist-vendored
