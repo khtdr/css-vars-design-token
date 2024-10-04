@@ -1,2 +1,5 @@
 dist/** linguist-generated
 coverage/** linguist-documentation
+eslint.config.mjs linguist-vendor
+jest.config.js linguist-vendor
+webpack.config.js linguist-vendor
