@@ -34,8 +34,10 @@ export default [
         ...globals.browser,
         ...globals.node,
       },
-
       parser: tsParser,
+      parserOptions: {
+        warnOnUnsupportedTypeScriptVersion: false,
+      },
     },
     settings: {
       react: {

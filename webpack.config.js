@@ -20,7 +20,6 @@ module.exports = {
       },
     ],
   },
-  // Add this section to output declaration files
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),

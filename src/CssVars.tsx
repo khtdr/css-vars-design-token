@@ -13,12 +13,12 @@ type CssVarsContextType = {
 
 const CssVarsContext = React.createContext({} as CssVarsContextType);
 
-export const useDesignToken = () => {
+export const useDesignToken = <Token extends DesignToken>(): Token => {
   const context = React.useContext(CssVarsContext);
   if (!context) {
     throw new Error('useDesignToken must be used within a CssVarsProvider');
   }
-  return context.token;
+  return context.token as Token;
 };
 
 export const useThemeMode = () => {
@@ -61,7 +61,7 @@ export const CssVarsProvider = ({
         style={{
           height: 'inherit',
           width: 'inherit',
-          ...flattenToken(token),
+          ...toCssVars(token),
           ...style,
         }}
       >
@@ -71,7 +71,7 @@ export const CssVarsProvider = ({
   );
 };
 
-function flattenToken(
+export function toCssVars(
   obj: DesignToken,
   parentKey: string = '-',
 ): Record<string, string | number> {
@@ -79,7 +79,7 @@ function flattenToken(
     (acc, key) => {
       const prefixedKey = parentKey ? `${parentKey}-${key}` : key;
       if (typeof obj[key] === 'object') {
-        Object.assign(acc, flattenToken(obj[key] as DesignToken, prefixedKey));
+        Object.assign(acc, toCssVars(obj[key] as DesignToken, prefixedKey));
       } else {
         acc[prefixedKey] = obj[key] as string | number;
       }
