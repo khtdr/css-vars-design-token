@@ -3,4 +3,3 @@ coverage/** linguist-documentation
 eslint.config.mjs linguist-vendored
 jest.config.js linguist-vendored
 webpack.config.js linguist-vendored
-vite.config.js linguist-vendored
