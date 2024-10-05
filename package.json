@@ -1,8 +1,23 @@
 {
   "name": "css-vars-design-token",
+  "description": "Just Use CSS (but with dark/light mode variables and hooks, if you want)",
   "version": "1.0.0",
   "main": "dist/bundle.js",
+  "author": "mazzarelli@gmail.com",
+  "license": "ISC",
   "types": "dist/css-vars-design-token.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khtdr/css-vars-design-token"
+  },
+  "keywords": [
+    "css",
+    "css variables",
+    "react",
+    "dark mode",
+    "light mode",
+    "design token"
+  ],
   "scripts": {
     "test": "jest",
     "build": "webpack --config webpack.config.js --mode production",
@@ -13,17 +28,6 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
-  "keywords": [
-    "css",
-    "css variables",
-    "react",
-    "dark mode",
-    "light mode",
-    "design token"
-  ],
-  "author": "mazzarelli@gmail.com",
-  "license": "ISC",
-  "description": "Just Use CSS (but with dark/light mode variables and hooks, if you want)",
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
