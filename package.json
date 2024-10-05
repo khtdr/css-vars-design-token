@@ -5,7 +5,7 @@
   "types": "dist/css-vars-design-token.d.ts",
   "scripts": {
     "test": "jest",
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js --mode production",
     "clean": "rm -rf dist coverage",
     "demo": "http-server -p 8080 -o /demo.html",
     "lint": "eslint --ignore-pattern coverage --ignore-pattern dist --ignore-pattern '**/*test.*'",
