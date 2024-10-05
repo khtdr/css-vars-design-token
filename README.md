@@ -1,18 +1,18 @@
 
 # Table of Contents
 
-1.  [CssVarsDesignToken Documentation](#org4f7f936)
-    1.  [Introduction](#org8ce9850)
-    2.  [Installation](#org100e0a5)
-    3.  [Usage](#org9e15b9e)
-    4.  [Example 1: Simple Usage](#org342f2c6)
-    5.  [Example 2: Nested DesignToken Usage](#orga827251)
-2.  [Contributing](#org144750e)
-3.  [Test and code coverage reports](#org7cf8d8c)
+1.  [CssVarsDesignToken Documentation](#org1a0c4f7)
+    1.  [Introduction](#org9a8eda5)
+    2.  [Installation](#org240065b)
+    3.  [Usage](#org0fc1073)
+    4.  [Example 1: Simple Usage](#org2a970ca)
+    5.  [Example 2: Nested DesignToken Usage](#orgd11a2a6)
+2.  [Contributing](#org850e910)
+3.  [Test and code coverage reports](#orga6165bc)
 
 
 
-<a id="org4f7f936"></a>
+<a id="org1a0c4f7"></a>
 
 # CssVarsDesignToken Documentation
 
@@ -21,14 +21,14 @@
 CssVarsDesignToken simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme customization. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
 
 
-<a id="org8ce9850"></a>
+<a id="org9a8eda5"></a>
 
 ## Introduction
 
 CssVarsDesignToken is a TypeScript library designed to manage design tokens and themes using CSS variables in React applications. This documentation provides an overview of how to use CssVarsDesignToken in your projects.
 
 
-<a id="org100e0a5"></a>
+<a id="org240065b"></a>
 
 ## Installation
 
@@ -40,7 +40,7 @@ To use CssVarsDesignToken in your project, you need to install the following dep
 Ensure that you have these dependencies included in your project. The specific version shouldn&rsquo;t matter.
 
 
-<a id="org9e15b9e"></a>
+<a id="org0fc1073"></a>
 
 ## Usage
 
@@ -62,7 +62,7 @@ Ensure that you have these dependencies included in your project. The specific v
     -   Utility function to convert DesignToken objects into CSS variable format.
 
 
-<a id="org342f2c6"></a>
+<a id="org2a970ca"></a>
 
 ## Example 1: Simple Usage
 
@@ -111,7 +111,8 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
     </html>
 ```
 
-<a id="orga827251"></a>
+
+<a id="orgd11a2a6"></a>
 
 ## Example 2: Nested DesignToken Usage
 
@@ -170,7 +171,7 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
 ```
 
 
-<a id="org144750e"></a>
+<a id="org850e910"></a>
 
 # Contributing
 
@@ -181,33 +182,34 @@ If you want to contribute to this project, please follow these guidelines:
 3.  Make your changes in a feature branch.
 4.  Write tests for your changes if applicable.
 5.  Run the following NPM scripts:
-    -   npm test: Run Jest for testing.
-    -   npm run build: Build the project using Webpack in production mode.
-    -   npm run clean: Remove the dist and coverage directories.
-    -   npm run demo: Start a local server to view the demo at <http://localhost:8080/demo.html>.
-    -   npm run lint: Lint the project using ESLint.
-    -   npm run format: Format the TypeScript and JSX files using Prettier.
-    -   npm run test:watch: Watch mode for running Jest tests.
-    -   npm run test:coverage: Run Jest with test coverage reporting.
-6.  Submit a pull request to the main branch.
+    -   `npm test`: Run Jest for testing.
+    -   `npm run build`: Build the project using Webpack in production mode.
+    -   `npm run clean`: Remove the `dist` and `coverage` directories.
+    -   `npm run demo`: Start a local server to view the demo at <http://localhost:8080/demo.html>.
+    -   `npm run lint`: Lint the project using ESLint.
+    -   `npm run format`: Format the TypeScript and JSX files using Prettier.
+    -   `npm run test:watch`: Watch mode for running Jest tests.
+    -   `npm run test:coverage`: Run Jest with test coverage reporting.
+6.  Submit a pull request to the `main` branch.
 7.  Provide a clear description of the changes you made in your pull request.
 
 Thank you for contributing to this project!
 
 
-<a id="org7cf8d8c"></a>
+<a id="orga6165bc"></a>
 
 # Test and code coverage reports
 
+    
     > css-vars-design-token@1.0.1 test:coverage
     > jest --coverage
     
     PASS ./test.tsx
       Function toCssVars
-        ✓ toCssVars returns the expected flat list of css vars (1 ms)
+        ✓ toCssVars returns the expected flat list of css vars (2 ms)
       React integrations
         ✓ Computed style matches the expectation from the token (12 ms)
-        ✓ Computed style matches the other theme upon toggling (8 ms)
+        ✓ Computed style matches the other theme upon toggling (7 ms)
     
     ---------------------------|---------|----------|---------|---------|-------------------
     File                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
