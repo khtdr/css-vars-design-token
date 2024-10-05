@@ -138,6 +138,7 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
 
 
 
+** Test and code coverage reports
 #+BEGIN_SRC sh :exports results :results verbatim
 cd .. && npm run test:coverage 2>&1
 #+END_SRC

@@ -1,6 +1,6 @@
 {
   "name": "css-vars-design-token",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "main": "dist/bundle.js",
   "types": "dist/css-vars-design-token.d.ts",
   "scripts": {
