@@ -1,30 +1,31 @@
 
 # Table of Contents
 
-1.  [CssVarsDesignToken Documentation](#orgdb82787)
-    1.  [Introduction](#org1696f4e)
-    2.  [Installation](#orgf810ceb)
-    3.  [Usage](#orgc03cb12)
-    4.  [Example 1: Simple Usage](#orgd360c27)
-    5.  [Example 2: Nested DesignToken Usage](#orgeb668bc)
+1.  [CssVarsDesignToken Documentation](#org1118314)
+    1.  [Introduction](#orgcd18e1e)
+    2.  [Installation](#orgaa22024)
+    3.  [Usage](#org7ba4e4b)
+    4.  [Example 1: Simple Usage](#orgcb13d07)
+    5.  [Example 2: Nested DesignToken Usage](#org40355d7)
+    6.  [Test and code coverage reports](#orgebc0707)
 
 
 
-<a id="orgdb82787"></a>
+<a id="org1118314"></a>
 
 # CssVarsDesignToken Documentation
 
 CssVarsDesignToken simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme customization. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
 
 
-<a id="org1696f4e"></a>
+<a id="orgcd18e1e"></a>
 
 ## Introduction
 
 CssVarsDesignToken is a TypeScript library designed to manage design tokens and themes using CSS variables in React applications. This documentation provides an overview of how to use CssVarsDesignToken in your projects.
 
 
-<a id="orgf810ceb"></a>
+<a id="orgaa22024"></a>
 
 ## Installation
 
@@ -36,7 +37,7 @@ To use CssVarsDesignToken in your project, you need to install the following dep
 Ensure that you have these dependencies included in your project. The specific version shouldn&rsquo;t matter.
 
 
-<a id="orgc03cb12"></a>
+<a id="org7ba4e4b"></a>
 
 ## Usage
 
@@ -58,7 +59,7 @@ Ensure that you have these dependencies included in your project. The specific v
     -   Utility function to convert DesignToken objects into CSS variable format.
 
 
-<a id="orgd360c27"></a>
+<a id="orgcb13d07"></a>
 
 ## Example 1: Simple Usage
 
@@ -106,7 +107,7 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
     </html>
 
 
-<a id="orgeb668bc"></a>
+<a id="org40355d7"></a>
 
 ## Example 2: Nested DesignToken Usage
 
@@ -162,18 +163,23 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
       </body>
     </html>
 
+
+<a id="orgebc0707"></a>
+
+## Test and code coverage reports
+
     
-    > css-vars-design-token@0.0.9 test:coverage
+    > css-vars-design-token@1.0.0 test:coverage
     > jest --coverage
     
-    (node:92464) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+    (node:93359) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
     (Use `node --trace-deprecation ...` to show where the warning was created)
     PASS ./test.tsx
       Function toCssVars
         ✓ toCssVars returns the expected flat list of css vars (2 ms)
       React integrations
-        ✓ Computed style matches the expectation from the token (12 ms)
-        ✓ Computed style matches the other theme upon toggling (8 ms)
+        ✓ Computed style matches the expectation from the token (13 ms)
+        ✓ Computed style matches the other theme upon toggling (7 ms)
     
     ---------------------------|---------|----------|---------|---------|-------------------
     File                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
