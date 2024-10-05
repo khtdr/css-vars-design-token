@@ -1,31 +1,34 @@
 
 # Table of Contents
 
-1.  [CssVarsDesignToken Documentation](#org09f3485)
-    1.  [Introduction](#org0f7d35f)
-    2.  [Installation](#org9641ebe)
-    3.  [Usage](#orga72bd89)
-    4.  [Example 1: Simple Usage](#org6d81a42)
-    5.  [Example 2: Nested DesignToken Usage](#org9c6ace2)
-    6.  [Test and code coverage reports](#orgcca2a21)
+1.  [CssVarsDesignToken Documentation](#org4549448)
+    1.  [Introduction](#org5f54850)
+    2.  [Installation](#org09dd917)
+    3.  [Usage](#orge7dd55e)
+    4.  [Example 1: Simple Usage](#org27bc945)
+    5.  [Example 2: Nested DesignToken Usage](#orgcd2a6b4)
+2.  [Contributing](#org0615791)
+3.  [Test and code coverage reports](#org0105c1c)
 
 
 
-<a id="org09f3485"></a>
+<a id="org4549448"></a>
 
 # CssVarsDesignToken Documentation
+
+*Much of this documentation was machine generated, suggestions welcome.* 🙏
 
 CssVarsDesignToken simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme customization. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
 
 
-<a id="org0f7d35f"></a>
+<a id="org5f54850"></a>
 
 ## Introduction
 
 CssVarsDesignToken is a TypeScript library designed to manage design tokens and themes using CSS variables in React applications. This documentation provides an overview of how to use CssVarsDesignToken in your projects.
 
 
-<a id="org9641ebe"></a>
+<a id="org09dd917"></a>
 
 ## Installation
 
@@ -37,7 +40,7 @@ To use CssVarsDesignToken in your project, you need to install the following dep
 Ensure that you have these dependencies included in your project. The specific version shouldn&rsquo;t matter.
 
 
-<a id="orga72bd89"></a>
+<a id="orge7dd55e"></a>
 
 ## Usage
 
@@ -59,12 +62,13 @@ Ensure that you have these dependencies included in your project. The specific v
     -   Utility function to convert DesignToken objects into CSS variable format.
 
 
-<a id="org6d81a42"></a>
+<a id="org27bc945"></a>
 
 ## Example 1: Simple Usage
 
 Here is a simple example demonstrating the usage of CssVarsDesignToken with basic theming:
 
+``` html
     <!doctype html>
     <html lang="en">
       <head>
@@ -105,82 +109,101 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
         </script>
       </body>
     </html>
+```
 
 
-<a id="org9c6ace2"></a>
+<a id="orgcd2a6b4"></a>
 
 ## Example 2: Nested DesignToken Usage
 
 Here is an example demonstrating the nested nature of DesignToken for more complex theming:
 
-<div class="HTML" id="org95244b0">
-<p>
-&lt;!doctype html&gt;
-&lt;html lang=&ldquo;en&rdquo;&gt;
-  &lt;head&gt;
-    &lt;script src=&ldquo;<a href="https://unpkg.com/@babel/standalone/babel.min.js">https://unpkg.com/@babel/standalone/babel.min.js</a>&rdquo;&gt;&lt;/script&gt;
-    &lt;script src=&ldquo;/node<sub>modules</sub>/react/umd/react.production.min.js&rdquo;&gt;&lt;/script&gt;
-    &lt;script src=&ldquo;/node<sub>modules</sub>/react-dom/umd/react-dom.production.min.js&rdquo;&gt;&lt;/script&gt;
-    &lt;script src=&ldquo;/dist/bundle.js&rdquo;&gt;&lt;/script&gt;
-    &lt;style&gt;
-      body {
-        margin: var(&#x2013;layout-margin, 20px);
-        background-color: var(&#x2013;color-bg, #f0f0f0);
-        color: var(&#x2013;color-fg, #333);
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div id=&ldquo;root&rdquo;&gt;&lt;/div&gt;
-    &lt;script type=&ldquo;text/babel&rdquo;&gt;
-      const { useCssTheme } = CssVarsDesignToken;
-      function NestedThemeComponent() {
-        const { theme, toggle } = useCssTheme();
-</p>
-
-<p>
-        return (
-          &lt;div&gt;
-            &lt;h1&gt;CSS Vars &amp; Design Token &#x2013; Nested Theme Example&lt;/h1&gt;
-            &lt;p&gt;Current Theme: {theme}&lt;/p&gt;
-            &lt;button onClick={toggle}&gt;Toggle Theme&lt;/button&gt;
-          &lt;/div&gt;
-        );
-      }
-      ReactDOM.createRoot(document.getElementById(&rsquo;root&rsquo;)).render(
-        &lt;CssVarsDesignToken.CssVarsDesignTokenProvider
-          themes={{
-            light: {
-              color: { bg: &rsquo;#fff&rsquo;, fg: &rsquo;#333&rsquo; },
-              layout: { margin: 10 },
-            },
-            dark: {
-              color: { bg: &rsquo;#333&rsquo;, fg: &rsquo;#fff&rsquo; },
-              layout: { margin: 20 },
-            },
-          }}
-        &gt;
-          &lt;NestedThemeComponent /&gt;
-        &lt;/CssVarsDesignToken.CssVarsDesignTokenProvider&gt;,
-      );
-    &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</p>
-
-</div>
+``` html
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="/node_modules/react/umd/react.production.min.js"></script>
+        <script src="/node_modules/react-dom/umd/react-dom.production.min.js"></script>
+        <script src="/dist/bundle.js"></script>
+        <style>
+          body {
+            margin: var(--layout-margin, 20px);
+            background-color: var(--color-bg, #f0f0f0);
+            color: var(--color-fg, #333);
+          }
+        </style>
+      </head>
+      <body>
+        <div id="root"></div>
+        <script type="text/babel">
+          const { useCssTheme } = CssVarsDesignToken;
+          function NestedThemeComponent() {
+            const { theme, toggle } = useCssTheme();
+    
+            return (
+              <div>
+                <h1>CSS Vars & Design Token -- Nested Theme Example</h1>
+                <p>Current Theme: {theme}</p>
+                <button onClick={toggle}>Toggle Theme</button>
+              </div>
+            );
+          }
+          ReactDOM.createRoot(document.getElementById('root')).render(
+            <CssVarsDesignToken.CssVarsDesignTokenProvider
+              themes={{
+                light: {
+                  color: { bg: '#fff', fg: '#333' },
+                  layout: { margin: 10 },
+                },
+                dark: {
+                  color: { bg: '#333', fg: '#fff' },
+                  layout: { margin: 20 },
+                },
+              }}
+            >
+              <NestedThemeComponent />
+            </CssVarsDesignToken.CssVarsDesignTokenProvider>,
+          );
+        </script>
+      </body>
+    </html>
+```
 
 
-<a id="orgcca2a21"></a>
+<a id="org0615791"></a>
 
-## Test and code coverage reports
+# Contributing
+
+If you want to contribute to this project, please follow these guidelines:
+
+1.  Fork the repository on [GitHub](<https://github.com/khtdr/css-vars-design-token>).
+2.  Clone your forked repository locally.
+3.  Make your changes in a feature branch.
+4.  Write tests for your changes if applicable.
+5.  Run the following NPM scripts:
+    -   \`npm test\`: Run Jest for testing.
+    -   \`npm run build\`: Build the project using Webpack in production mode.
+    -   \`npm run clean\`: Remove the \`dist\` and \`coverage\` directories.
+    -   \`npm run demo\`: Start a local server to view the demo at <http://localhost:8080/demo.html>.
+    -   \`npm run lint\`: Lint the project using ESLint.
+    -   \`npm run format\`: Format the TypeScript and JSX files using Prettier.
+    -   \`npm run test:watch\`: Watch mode for running Jest tests.
+    -   \`npm run test:coverage\`: Run Jest with test coverage reporting.
+6.  Submit a pull request to the \`main\` branch.
+7.  Provide a clear description of the changes you made in your pull request.
+
+Thank you for contributing to this project!
+
+
+<a id="org0105c1c"></a>
+
+# Test and code coverage reports
 
     
     > css-vars-design-token@1.0.1 test:coverage
     > jest --coverage
     
-    (node:96264) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-    (Use `node --trace-deprecation ...` to show where the warning was created)
     PASS ./test.tsx
       Function toCssVars
         ✓ toCssVars returns the expected flat list of css vars (1 ms)
@@ -196,7 +219,6 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
     ---------------------------|---------|----------|---------|---------|-------------------
     Test Suites: 1 passed, 1 total
     Tests:       3 passed, 3 total
-    Snapshots:   0 total
-    Time:        1.075 s
+
     Ran all test suites.
 

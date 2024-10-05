@@ -3,6 +3,8 @@
 
 * CssVarsDesignToken Documentation
 
+/Much of this documentation was machine generated, suggestions welcome./ 🙏
+
 CssVarsDesignToken simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme customization. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
 
 ** Introduction
@@ -84,7 +86,7 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
 ** Example 2: Nested DesignToken Usage
 Here is an example demonstrating the nested nature of DesignToken for more complex theming:
 
-#+BEGIN_HTML
+#+BEGIN_SRC html
 <!doctype html>
 <html lang="en">
   <head>
@@ -134,11 +136,32 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
     </script>
   </body>
 </html>
-#+END_HTML
+#+END_SRC
 
 
+* Contributing
 
-** Test and code coverage reports
+If you want to contribute to this project, please follow these guidelines:
+
+1. Fork the repository on [GitHub](https://github.com/khtdr/css-vars-design-token).
+2. Clone your forked repository locally.
+3. Make your changes in a feature branch.
+4. Write tests for your changes if applicable.
+5. Run the following NPM scripts:
+   - `npm test`: Run Jest for testing.
+   - `npm run build`: Build the project using Webpack in production mode.
+   - `npm run clean`: Remove the `dist` and `coverage` directories.
+   - `npm run demo`: Start a local server to view the demo at http://localhost:8080/demo.html.
+   - `npm run lint`: Lint the project using ESLint.
+   - `npm run format`: Format the TypeScript and JSX files using Prettier.
+   - `npm run test:watch`: Watch mode for running Jest tests.
+   - `npm run test:coverage`: Run Jest with test coverage reporting.
+6. Submit a pull request to the `main` branch.
+7. Provide a clear description of the changes you made in your pull request.
+
+Thank you for contributing to this project!
+
+* Test and code coverage reports
 #+BEGIN_SRC sh :exports results :results verbatim
 cd .. && npm run test:coverage 2>&1
 #+END_SRC
