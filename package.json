@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --config webpack.config.js",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist coverage",
     "demo": "http-server -p 8080 -o /demo.html",
     "lint": "eslint --ignore-pattern coverage --ignore-pattern dist --ignore-pattern '**/*test.*'",
     "format": "prettier --write \"./*.{ts,tsx}\"",
