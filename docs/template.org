@@ -148,15 +148,15 @@ If you want to contribute to this project, please follow these guidelines:
 3. Make your changes in a feature branch.
 4. Write tests for your changes if applicable.
 5. Run the following NPM scripts:
-   - `npm test`: Run Jest for testing.
-   - `npm run build`: Build the project using Webpack in production mode.
-   - `npm run clean`: Remove the `dist` and `coverage` directories.
-   - `npm run demo`: Start a local server to view the demo at http://localhost:8080/demo.html.
-   - `npm run lint`: Lint the project using ESLint.
-   - `npm run format`: Format the TypeScript and JSX files using Prettier.
-   - `npm run test:watch`: Watch mode for running Jest tests.
-   - `npm run test:coverage`: Run Jest with test coverage reporting.
-6. Submit a pull request to the `main` branch.
+  - npm test: Run Jest for testing.
+  - npm run build: Build the project using Webpack in production mode.
+  - npm run clean: Remove the dist and coverage directories.
+  - npm run demo: Start a local server to view the demo at http://localhost:8080/demo.html.
+  - npm run lint: Lint the project using ESLint.
+  - npm run format: Format the TypeScript and JSX files using Prettier.
+  - npm run test:watch: Watch mode for running Jest tests.
+  - npm run test:coverage: Run Jest with test coverage reporting.
+6. Submit a pull request to the main branch.
 7. Provide a clear description of the changes you made in your pull request.
 
 Thank you for contributing to this project!
