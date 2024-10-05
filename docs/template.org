@@ -2,17 +2,17 @@
 
 * Documentation Generation
 
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :exports results :results verbatim
 cd .. && npm run lint
 #+END_SRC
 
 
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :exports results :results verbatim
 cd .. && npm run test:coverage 2>&1
 #+END_SRC
 
 
-#+BEGIN_SRC emacs-lisp :results silent :exports code
+#+BEGIN_SRC emacs-lisp :results silent :exports none
 (defun run-all-sh-code-blocks ()
   (interactive)
   (org-babel-map-executables nil
@@ -25,7 +25,7 @@ cd .. && npm run test:coverage 2>&1
 (org-export-to-file 'md "../README.md")
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :results silent :exports code
+#+BEGIN_SRC emacs-lisp :results silent :exports none
 (save-excursion
   (goto-char (point-min))
   (while (re-search-forward "#\\+BEGIN_SRC" nil t)
