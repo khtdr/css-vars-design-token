@@ -5,18 +5,67 @@
 
 /Much of this documentation was machine generated, suggestions welcome./ 🙏
 
-CssVarsDesignToken simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme customization. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
+CssVarsDesignToken simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme selection. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
 
 ** Introduction
 CssVarsDesignToken is a TypeScript library designed to manage design tokens and themes using CSS variables in React applications. This documentation provides an overview of how to use CssVarsDesignToken in your projects.
 
+Define dark and light themes however you like.
+#+BEGIN_SRC javascript
+const themes= {
+    light: {
+        color: { bg: '#fff', fg: '#333' },
+        layout: { margin: 10 }
+    },
+    dark: {
+        color: { bg: '#333', fg: '#fff' },
+        layout: { margin: 20 }
+    }
+}
+#+END_SRC
+
+Wrap your app in a =CssVarsDesignTokenProvider=
+#+BEGIN_SRC javascript
+import { CssVarsDesignTokenProvider, useCssTheme } from 'css-vars-design-token';
+
+const App = () =>
+    <CssVarsDesignTokenProvider themes={themes}>
+        <Components />
+    </CssVarsDesignTokenProvider>
+
+function Components() {
+    const { theme, toggle } = useCssTheme();
+    return (
+        <div>
+            Current Theme: <strong>{theme}</strong>
+
+            <button onClick={toggle}>Toggle Theme</button>
+        </div>
+    );
+}
+#+END_SRC
+
+And use CSS Variables wherever you like. The object keys are flattened and converted to CSS variables.
+#+BEGIN_SRC css
+.title h1 {
+    color: var(--color-fg);
+    background-color: var(--color-bg);
+    margin: var(--layout-margin);
+}
+#+END_SRC
+
+#+BEGIN_SRC html
+<div style={{ margin: "var(--layout-margin)" }}>
+    Hello World
+</div>
+#+END_SRC
+
 ** Installation
-To use CssVarsDesignToken in your project, you need to install the following dependencies:
+To use CssVarsDesignToken in your project, you need to have installed the following peer dependencies:
 
-- react
-- react-dom
+- =react= Any recent version will do.
 
-Ensure that you have these dependencies included in your project. The specific version shouldn't matter.
+Ensure that you have these dependencies included in your project.
 
 
 ** Usage
@@ -72,11 +121,11 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
         <CssVarsDesignToken.CssVarsDesignTokenProvider
           themes={{
             light: { primary: '#333', secondary: '#666' },
-            dark: { primary: '#fff', secondary: '#ccc' },
+            dark: { primary: '#fff', secondary: '#ccc' }
           }}
         >
           <App />
-        </CssVarsDesignToken.CssVarsDesignTokenProvider>,
+        </CssVarsDesignToken.CssVarsDesignTokenProvider>
       );
     </script>
   </body>
@@ -96,9 +145,9 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
     <script src="/dist/bundle.js"></script>
     <style>
       body {
-        margin: var(--layout-margin, 20px);
-        background-color: var(--color-bg, #f0f0f0);
-        color: var(--color-fg, #333);
+        margin: var(--layout-margin);
+        background-color: var(--color-bg);
+        color: var(--color-fg);
       }
     </style>
   </head>
@@ -108,7 +157,6 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
       const { useCssTheme } = CssVarsDesignToken;
       function NestedThemeComponent() {
         const { theme, toggle } = useCssTheme();
-
         return (
           <div>
             <h1>CSS Vars & Design Token -- Nested Theme Example</h1>
@@ -122,44 +170,21 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
           themes={{
             light: {
               color: { bg: '#fff', fg: '#333' },
-              layout: { margin: 10 },
+              layout: { margin: 10 }
             },
             dark: {
               color: { bg: '#333', fg: '#fff' },
-              layout: { margin: 20 },
-            },
+              layout: { margin: 20 }
+            }
           }}
         >
           <NestedThemeComponent />
-        </CssVarsDesignToken.CssVarsDesignTokenProvider>,
+        </CssVarsDesignToken.CssVarsDesignTokenProvider>
       );
     </script>
   </body>
 </html>
 #+END_SRC
-
-
-* Contributing
-
-If you want to contribute to this project, please follow these guidelines:
-
-1. Fork the repository on [GitHub](https://github.com/khtdr/css-vars-design-token).
-2. Clone your forked repository locally.
-3. Make your changes in a feature branch.
-4. Write tests for your changes if applicable.
-5. Run the following NPM scripts:
-   - ~npm test~: Run Jest for testing.
-   - ~npm run build~: Build the project using Webpack in production mode.
-   - ~npm run clean~: Remove the ~dist~ and ~coverage~ directories.
-   - ~npm run demo~: Start a local server to view the demo at http://localhost:8080/demo.html.
-   - ~npm run lint~: Lint the project using ESLint.
-   - ~npm run format~: Format the TypeScript and JSX files using Prettier.
-   - ~npm run test:watch~: Watch mode for running Jest tests.
-   - ~npm run test:coverage~: Run Jest with test coverage reporting.
-6. Submit a pull request to the ~main~ branch.
-7. Provide a clear description of the changes you made in your pull request.
-
-Thank you for contributing to this project!
 
 * Test and code coverage reports
 #+BEGIN_SRC sh :exports results :results verbatim
@@ -169,5 +194,41 @@ cd .. && npm run test:coverage 2>&1
 #+BEGIN_SRC emacs-lisp :results silent :exports none
 ;; To Build documentation, evaluate this block with
 ;; Ctrl+c Ctrl+C
+;; Then go fix some of the quierks in the generated documentation
 (org-export-to-file 'md "../README.md")
 #+END_SRC
+
+* Development & Contributing
+
+There are additional dependencies for development:
+
+- =typescript= for auto-completion and type checking.
+- =jest= for testing.
+- =webpack= for bundling the project.
+- =eslint= and =prettier= for linting and formatting.
+- =http-server= for running the demo locally.
+- =org-mode= for generating documentation.
+
+The following npm scripts are available for development:
+
+- ~npm test~: Run Jest for testing.
+- ~npm run build~: Build the project using Webpack in production mode.
+- ~npm run clean~: Remove the ~dist~ and ~coverage~ directories.
+- ~npm run demo~: Start a local server to view the demo at http://localhost:8080/demo.html.
+- ~npm run lint~: Lint the project using ESLint.
+- ~npm run format~: Format the TypeScript and JSX files using Prettier.
+- ~npm run test:watch~: Watch mode for running Jest tests.
+- ~npm run test:coverage~: Run Jest with test coverage reporting.
+
+If you want to contribute to this project, please follow these guidelines:
+
+1. Fork the repository on [GitHub](https://github.com/khtdr/css-vars-design-token).
+2. Clone your forked repository locally.
+3. Make your changes in a feature branch.
+4. Write tests for your changes if applicable.
+5. Update the documentation as needed.
+6. Submit a pull request to the ~main~ branch.
+7. Provide a clear description of the changes you made in your pull request.
+
+Thank you for contributing to this project!
+
