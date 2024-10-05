@@ -24,10 +24,6 @@
   "author": "mazzarelli@gmail.com",
   "license": "ISC",
   "description": "Just Use CSS (but with dark/light mode variables and hooks, if you want)",
-  "dependencies": {
-    "react": "*",
-    "react-dom": "*"
-  },
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"

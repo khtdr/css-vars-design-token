@@ -5,10 +5,10 @@ interface DesignToken {
 }
 
 type CssVarsContextType = {
-  mode: 'dark' | 'light';
-  modes: Record<'dark' | 'light', DesignToken>;
+  theme: 'dark' | 'light';
+  themes: Record<'dark' | 'light', DesignToken>;
   token: DesignToken;
-  setMode: (mode: 'dark' | 'light') => void;
+  setTheme: (theme: 'dark' | 'light') => void;
 };
 
 const CssVarsContext = React.createContext({} as CssVarsContextType);
@@ -21,40 +21,43 @@ export const useDesignToken = <Token extends DesignToken>(): Token => {
   return context.token as Token;
 };
 
-export const useThemeMode = () => {
+export const useCssTheme = () => {
   const context = React.useContext(CssVarsContext);
   if (!context) {
-    throw new Error('useThemeMode must be used within a CssVarsProvider');
+    throw new Error('useCssTheme must be used within a CssVarsProvider');
   }
-  const setMode = React.useCallback(
-    (mode: 'dark' | 'light' | 'auto') => {
-      if (mode === 'auto') {
+  const setTheme = React.useCallback(
+    (theme: 'dark' | 'light' | 'auto') => {
+      if (theme === 'auto') {
         const prefersDark = window.matchMedia(
           '(prefers-color-scheme: dark)',
         ).matches;
-        context.setMode(prefersDark ? 'dark' : 'light');
+        context.setTheme(prefersDark ? 'dark' : 'light');
       } else {
-        context.setMode(mode);
+        context.setTheme(theme);
       }
     },
-    [context.setMode],
+    [context.setTheme],
   );
-  return { mode: context.mode, setMode };
+  const toggle = React.useCallback(() => {
+    setTheme(context.theme === 'dark' ? 'light' : 'dark');
+  }, [context.theme, setTheme]);
+  return { theme: context.theme, setTheme, toggle };
 };
 
 export const CssVarsProvider = ({
   children,
-  modes,
+  themes,
   style,
 }: React.PropsWithChildren<{
-  modes: CssVarsContextType['modes'];
+  themes: CssVarsContextType['themes'];
   style?: React.CSSProperties;
 }>) => {
-  type Mode = keyof typeof modes;
-  const [mode, setMode] = React.useState(Object.keys(modes)[0] as Mode);
+  type Theme = keyof typeof themes;
+  const [theme, setTheme] = React.useState(Object.keys(themes)[0] as Theme);
   const token: DesignToken =
-    modes[mode] || modes[Object.keys(modes)[0] as Mode];
-  const value = { modes, token, mode, setMode } as CssVarsContextType;
+    themes[theme] || themes[Object.keys(themes)[0] as Theme];
+  const value = { themes, token, theme, setTheme } as CssVarsContextType;
   return (
     <CssVarsContext.Provider value={value}>
       <div

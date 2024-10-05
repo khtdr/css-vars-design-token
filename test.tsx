@@ -3,7 +3,7 @@ import { act, render } from '@testing-library/react';
 import {
   CssVarsProvider,
   useDesignToken,
-  useThemeMode,
+  useCssTheme,
   toCssVars,
 } from './css-vars-design-token';
 
@@ -24,39 +24,39 @@ describe('Function toCssVars', () => {
   });
 });
 
-type TestModeToken = { name: string };
-const LIGHT_MODE: TestModeToken = { name: 'light-mode' };
-const DARK_MODE: TestModeToken = { name: 'dark-mode' };
+type TestThemeToken = { name: string };
+const LIGHT_THEME: TestThemeToken = { name: 'light-theme' };
+const DARK_THEME: TestThemeToken = { name: 'dark-theme' };
 
 describe('React integrations', () => {
   test('Computed style matches the expectation from the token', () => {
-    const modes = {
-      dark: DARK_MODE,
-      light: LIGHT_MODE,
+    const themes = {
+      dark: DARK_THEME,
+      light: LIGHT_THEME,
     };
 
     const TestComponent = () => {
-      const token = useDesignToken<TestModeToken>();
+      const token = useDesignToken<TestThemeToken>();
       return <div data-testid="token-name">{token.name}</div>;
     };
 
     const { getByTestId } = render(
-      <CssVarsProvider modes={modes}>
+      <CssVarsProvider themes={themes}>
         <TestComponent />
       </CssVarsProvider>,
     );
-    expect(getByTestId('token-name').textContent).toBe(DARK_MODE.name);
+    expect(getByTestId('token-name').textContent).toBe(DARK_THEME.name);
   });
 
-  test('Computed style matches the other mode upon toggling', () => {
-    const modes = {
-      dark: DARK_MODE,
-      light: LIGHT_MODE,
+  test('Computed style matches the other theme upon toggling', () => {
+    const themes = {
+      dark: DARK_THEME,
+      light: LIGHT_THEME,
     };
 
     const TestComponent = () => {
-      const token = useDesignToken<TestModeToken>();
-      const { setMode } = useThemeMode();
+      const token = useDesignToken<TestThemeToken>();
+      const { setTheme } = useCssTheme();
 
       return (
         <>
@@ -64,24 +64,24 @@ describe('React integrations', () => {
           <button
             onClick={() => {
               act(() => {
-                setMode('light');
+                setTheme('light');
               });
             }}
           >
-            Light Mode
+            Light Theme
           </button>
         </>
       );
     };
 
     const { getByTestId, getByText } = render(
-      <CssVarsProvider modes={modes}>
+      <CssVarsProvider themes={themes}>
         <TestComponent />
       </CssVarsProvider>,
     );
 
-    expect(getByTestId('token-name').textContent).toBe(DARK_MODE.name);
-    getByText('Light Mode').click();
-    expect(getByTestId('token-name').textContent).toBe(LIGHT_MODE.name);
+    expect(getByTestId('token-name').textContent).toBe(DARK_THEME.name);
+    getByText('Light Theme').click();
+    expect(getByTestId('token-name').textContent).toBe(LIGHT_THEME.name);
   });
 });

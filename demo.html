@@ -3,48 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React Demo</title>
+    <title>Css Vars Design Token</title>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="/node_modules/react/umd/react.production.min.js"></script>
     <script src="/node_modules/react-dom/umd/react-dom.production.min.js"></script>
     <script src="/dist/bundle.js"></script>
+    <style>
+      * {
+        background-color: var(--primary);
+        color: var(--secondary);
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      const { useState } = React;
-
-      const token = {
-        light: {
-          primary: '#333',
-          secondary: '#666',
-          accent: '#f00',
-        },
-        dark: {
-          primary: '#fff',
-          secondary: '#ccc',
-          accent: '#0f0',
-        },
-      };
+      const { useCssThemes } = CssVars;
 
       function App() {
-        const [count, setCount] = useState(0);
+        const { toggle } = useCssTheme();
         return (
           <div>
-            <h1>CssVars Demo w/ React Counter</h1>
-            <p>Count: {count}</p>
-            <button onClick={() => setCount(count + 1)}>Increment</button>
-            <button onClick={() => setCount(count - 1)}>Decrement</button>
+            <h1>CssVars &amp; Design Token</h1>
+            <button onClick={toggle}>toggle</button>
           </div>
         );
       }
 
       ReactDOM.createRoot(document.getElementById('root')).render(
-        <React.StrictMode>
-          <CssVars.CssVarsProvider modes={token}>
-            <App />
-          </CssVars.CssVarsProvider>
-        </React.StrictMode>,
+        <CssVars.CssVarsProvider
+          themes={{
+            light: { primary: '#333', secondary: '#666' },
+            dark: { primary: '#fff', secondary: '#ccc' },
+          }}
+        >
+          <App />
+        </CssVars.CssVarsProvider>,
       );
     </script>
   </body>
