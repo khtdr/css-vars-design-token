@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Css Vars Design Token</title>
+    <title>Css-Vars Design Token Demo</title>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="/node_modules/react/umd/react.production.min.js"></script>
     <script src="/node_modules/react-dom/umd/react-dom.production.min.js"></script>
@@ -18,10 +18,8 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      const { useCssTheme } = CssVars;
-
       function App() {
-        const { toggle } = useCssTheme();
+        const { toggle } = CssVarsDesignToken.useCssVarsDesignTokenContext();
         return (
           <div>
             <h1>CssVars &amp; Design Token</h1>
@@ -31,14 +29,14 @@
       }
 
       ReactDOM.createRoot(document.getElementById('root')).render(
-        <CssVars.CssVarsProvider
+        <CssVarsDesignToken.CssVarsDesignTokenProvider
           themes={{
             light: { primary: '#333', secondary: '#666' },
             dark: { primary: '#fff', secondary: '#ccc' },
           }}
         >
           <App />
-        </CssVars.CssVarsProvider>,
+        </CssVarsDesignToken.CssVarsDesignTokenProvider>,
       );
     </script>
   </body>

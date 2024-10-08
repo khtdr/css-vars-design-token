@@ -1,22 +1,22 @@
-- [Css-Vars Design Token Documentation](#orgf6108b8)
-  - [Introduction](#orga5b5256)
-  - [Installation](#org6db0702)
-  - [Usage](#org11dc8bd)
-  - [Example 1: Simple Usage](#org80df78d)
-  - [Example 2: Nested DesignToken Usage](#org3a1abc3)
-- [Test and code coverage reports](#org268811e)
-- [Development & Contributing](#org33dcad1)
+- [Css-Vars Design Token Documentation](#org499176b)
+  - [Introduction](#org897408d)
+  - [Installation](#orga2b3d8f)
+  - [Usage](#org325d2d1)
+    - [Example 1: Simple Usage](#org310844b)
+    - [Example 2: Nested DesignToken Usage](#orga9b3a44)
+- [Test and code coverage reports](#orga38fc9a)
+- [Development & Contributing](#orgbdf7732)
 
 
 
-<a id="orgf6108b8"></a>
+<a id="org499176b"></a>
 
 # Css-Vars Design Token Documentation
 
 `CssVarsDesignToken` simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme selection. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
 
 
-<a id="orga5b5256"></a>
+<a id="org897408d"></a>
 
 ## Introduction
 
@@ -38,7 +38,10 @@ const themes= {
 Wrap your app in a `CssVarsDesignTokenProvider`
 
 ```javascript
-import { CssVarsDesignTokenProvider, useCssTheme } from 'css-vars-design-token';
+import {
+    CssVarsDesignTokenProvider,
+    useCssVarsDesignTokenContext
+} from 'css-vars-design-token';
 
 const App = () =>
     <CssVarsDesignTokenProvider themes={themes}>
@@ -46,11 +49,10 @@ const App = () =>
     </CssVarsDesignTokenProvider>
 
 function Components() {
-    const { theme, toggle } = useCssTheme();
+    const { theme, toggle } = useCssVarsDesignTokenContext();
     return (
         <div>
             Current Theme: <strong>{theme}</strong>
-
             <button onClick={toggle}>Toggle Theme</button>
         </div>
     );
@@ -74,7 +76,7 @@ h1 {
 ```
 
 
-<a id="org6db0702"></a>
+<a id="orga2b3d8f"></a>
 
 ## Installation
 
@@ -85,7 +87,7 @@ To use CssVarsDesignToken in your project, you need to have installed the follow
 Ensure that you have these dependencies included in your project.
 
 
-<a id="org11dc8bd"></a>
+<a id="org325d2d1"></a>
 
 ## Usage
 
@@ -107,9 +109,9 @@ Ensure that you have these dependencies included in your project.
     -   Utility function to convert DesignToken objects into CSS variable format.
 
 
-<a id="org80df78d"></a>
+<a id="org310844b"></a>
 
-## Example 1: Simple Usage
+### Example 1: Simple Usage
 
 Here is a simple example demonstrating the usage of CssVarsDesignToken with basic theming:
 
@@ -150,9 +152,9 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
 ```
 
 
-<a id="org3a1abc3"></a>
+<a id="orga9b3a44"></a>
 
-## Example 2: Nested DesignToken Usage
+### Example 2: Nested DesignToken Usage
 
 Here is an example demonstrating the nested nature of DesignToken for more complex theming:
 
@@ -201,7 +203,7 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
 ```
 
 
-<a id="org268811e"></a>
+<a id="orga38fc9a"></a>
 
 # Test and code coverage reports
 
@@ -212,9 +214,9 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
 
 PASS ./test.tsx
   Function toCssVars
-    ✓ toCssVars returns the expected flat list of css vars (1 ms)
+    ✓ toCssVars returns the expected flat list of css vars (2 ms)
   React integrations
-    ✓ Computed style matches the expectation from the token (12 ms)
+    ✓ Computed style matches the expectation from the token (15 ms)
     ✓ Computed style matches the other theme upon toggling (7 ms)
 
 ---------------------------|---------|----------|---------|---------|-------------------
@@ -223,13 +225,15 @@ File                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered 
 All files                  |   88.46 |    42.85 |   83.33 |      88 |                   
  css-vars-design-token.tsx |   88.46 |    42.85 |   83.33 |      88 | 23,30,42          
 ---------------------------|---------|----------|---------|---------|-------------------
-
 Test Suites: 1 passed, 1 total
 Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        1.059 s
+Ran all test suites.
 ```
 
 
-<a id="org33dcad1"></a>
+<a id="orgbdf7732"></a>
 
 # Development & Contributing
 

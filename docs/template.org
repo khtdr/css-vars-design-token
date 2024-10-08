@@ -22,7 +22,10 @@ const themes= {
 
 Wrap your app in a =CssVarsDesignTokenProvider=
 #+BEGIN_SRC javascript :exports code :results raw
-import { CssVarsDesignTokenProvider, useCssTheme } from 'css-vars-design-token';
+import {
+    CssVarsDesignTokenProvider,
+    useCssVarsDesignTokenContext
+} from 'css-vars-design-token';
 
 const App = () =>
     <CssVarsDesignTokenProvider themes={themes}>
@@ -30,11 +33,10 @@ const App = () =>
     </CssVarsDesignTokenProvider>
 
 function Components() {
-    const { theme, toggle } = useCssTheme();
+    const { theme, toggle } = useCssVarsDesignTokenContext();
     return (
         <div>
             Current Theme: <strong>{theme}</strong>
-
             <button onClick={toggle}>Toggle Theme</button>
         </div>
     );
@@ -82,7 +84,7 @@ Ensure that you have these dependencies included in your project.
 4. **toCssVarsDesignToken**
    - Utility function to convert DesignToken objects into CSS variable format.
 
-** Example 1: Simple Usage
+*** Example 1: Simple Usage
 Here is a simple example demonstrating the usage of CssVarsDesignToken with basic theming:
 
 #+BEGIN_SRC html :exports code :results raw
@@ -121,7 +123,7 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
 </html>
 #+END_SRC
 
-** Example 2: Nested DesignToken Usage
+*** Example 2: Nested DesignToken Usage
 Here is an example demonstrating the nested nature of DesignToken for more complex theming:
 
 #+BEGIN_SRC html :exports code :results raw
