@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { act, render } from '@testing-library/react';
 import {
-  CssVarsProvider,
-  useDesignToken,
-  useCssTheme,
   toCssVars,
+  useCssVarsDesignTokenContext,
+  CssVarsDesignTokenProvider,
 } from './css-vars-design-token';
 
 describe('Function toCssVars', () => {
@@ -36,14 +35,14 @@ describe('React integrations', () => {
     };
 
     const TestComponent = () => {
-      const token = useDesignToken<TestThemeToken>();
+      const { token } = useCssVarsDesignTokenContext<TestThemeToken>();
       return <div data-testid="token-name">{token.name}</div>;
     };
 
     const { getByTestId } = render(
-      <CssVarsProvider themes={themes}>
+      <CssVarsDesignTokenProvider themes={themes}>
         <TestComponent />
-      </CssVarsProvider>,
+      </CssVarsDesignTokenProvider>,
     );
     expect(getByTestId('token-name').textContent).toBe(DARK_THEME.name);
   });
@@ -55,8 +54,8 @@ describe('React integrations', () => {
     };
 
     const TestComponent = () => {
-      const token = useDesignToken<TestThemeToken>();
-      const { setTheme } = useCssTheme();
+      const { token, setTheme } =
+        useCssVarsDesignTokenContext<TestThemeToken>();
 
       return (
         <>
@@ -75,9 +74,9 @@ describe('React integrations', () => {
     };
 
     const { getByTestId, getByText } = render(
-      <CssVarsProvider themes={themes}>
+      <CssVarsDesignTokenProvider themes={themes}>
         <TestComponent />
-      </CssVarsProvider>,
+      </CssVarsDesignTokenProvider>,
     );
 
     expect(getByTestId('token-name').textContent).toBe(DARK_THEME.name);

@@ -1,17 +1,13 @@
 #+title: CSS Vars & Design Token
 
 
-* CssVarsDesignToken Documentation
+* Css-Vars Design Token Documentation
 
-/Much of this documentation was machine generated, suggestions welcome./ 🙏
-
-CssVarsDesignToken simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme selection. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
+=CssVarsDesignToken= simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme selection. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
 
 ** Introduction
-CssVarsDesignToken is a TypeScript library designed to manage design tokens and themes using CSS variables in React applications. This documentation provides an overview of how to use CssVarsDesignToken in your projects.
-
 Define dark and light themes however you like.
-#+BEGIN_SRC javascript
+#+BEGIN_SRC javascript :exports code :results raw
 const themes= {
     light: {
         color: { bg: '#fff', fg: '#333' },
@@ -25,7 +21,7 @@ const themes= {
 #+END_SRC
 
 Wrap your app in a =CssVarsDesignTokenProvider=
-#+BEGIN_SRC javascript
+#+BEGIN_SRC javascript :exports code :results raw
 import { CssVarsDesignTokenProvider, useCssTheme } from 'css-vars-design-token';
 
 const App = () =>
@@ -46,15 +42,15 @@ function Components() {
 #+END_SRC
 
 And use CSS Variables wherever you like. The object keys are flattened and converted to CSS variables.
-#+BEGIN_SRC css
-.title h1 {
+#+BEGIN_SRC css :exports code :results raw
+h1 {
     color: var(--color-fg);
     background-color: var(--color-bg);
     margin: var(--layout-margin);
 }
 #+END_SRC
 
-#+BEGIN_SRC html
+#+BEGIN_SRC html :exports code :results raw
 <div style={{ margin: "var(--layout-margin)" }}>
     Hello World
 </div>
@@ -89,14 +85,9 @@ Ensure that you have these dependencies included in your project.
 ** Example 1: Simple Usage
 Here is a simple example demonstrating the usage of CssVarsDesignToken with basic theming:
 
-#+BEGIN_SRC html
-<!doctype html>
-<html lang="en">
+#+BEGIN_SRC html :exports code :results raw
+<html>
   <head>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="/node_modules/react/umd/react.production.min.js"></script>
-    <script src="/node_modules/react-dom/umd/react-dom.production.min.js"></script>
-    <script src="/dist/bundle.js"></script>
     <style>
       * {
         background-color: var(--primary);
@@ -107,25 +98,23 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      const { useCssTheme } = CssVarsDesignToken;
       function App() {
         const { toggle } = useCssTheme();
         return (
           <div>
-            <h1>CSS Vars & Design Token -- Simple Usage</h1>
             <button onClick={toggle}>Toggle Theme</button>
           </div>
         );
       }
       ReactDOM.createRoot(document.getElementById('root')).render(
-        <CssVarsDesignToken.CssVarsDesignTokenProvider
+        <CssVarsDesignTokenProvider
           themes={{
             light: { primary: '#333', secondary: '#666' },
             dark: { primary: '#fff', secondary: '#ccc' }
           }}
         >
           <App />
-        </CssVarsDesignToken.CssVarsDesignTokenProvider>
+        </CssVarsDesignTokenProvider>
       );
     </script>
   </body>
@@ -135,14 +124,9 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
 ** Example 2: Nested DesignToken Usage
 Here is an example demonstrating the nested nature of DesignToken for more complex theming:
 
-#+BEGIN_SRC html
-<!doctype html>
-<html lang="en">
+#+BEGIN_SRC html :exports code :results raw
+<html>
   <head>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="/node_modules/react/umd/react.production.min.js"></script>
-    <script src="/node_modules/react-dom/umd/react-dom.production.min.js"></script>
-    <script src="/dist/bundle.js"></script>
     <style>
       body {
         margin: var(--layout-margin);
@@ -154,19 +138,17 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      const { useCssTheme } = CssVarsDesignToken;
       function NestedThemeComponent() {
         const { theme, toggle } = useCssTheme();
         return (
           <div>
-            <h1>CSS Vars & Design Token -- Nested Theme Example</h1>
             <p>Current Theme: {theme}</p>
             <button onClick={toggle}>Toggle Theme</button>
           </div>
         );
       }
       ReactDOM.createRoot(document.getElementById('root')).render(
-        <CssVarsDesignToken.CssVarsDesignTokenProvider
+        <CssVarsDesignTokenProvider
           themes={{
             light: {
               color: { bg: '#fff', fg: '#333' },
@@ -179,7 +161,7 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
           }}
         >
           <NestedThemeComponent />
-        </CssVarsDesignToken.CssVarsDesignTokenProvider>
+        </CssVarsDesignTokenProvider>
       );
     </script>
   </body>
@@ -195,7 +177,7 @@ cd .. && npm run test:coverage 2>&1
 ;; To Build documentation, evaluate this block with
 ;; Ctrl+c Ctrl+C
 ;; Then go fix some of the quierks in the generated documentation
-(org-export-to-file 'md "../README.md")
+(org-export-to-file 'gfm "../README.md")
 #+END_SRC
 
 * Development & Contributing

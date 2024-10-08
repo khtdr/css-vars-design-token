@@ -1,7 +1,7 @@
 {
   "name": "css-vars-design-token",
-  "description": "Just Use CSS (but with dark/light mode variables and hooks, if you want)",
-  "version": "1.0.2",
+  "description": "Use CSS Variables with dark/light mode themes and hooks.",
+  "version": "1.1.0",
   "main": "dist/bundle.js",
   "author": "mazzarelli@gmail.com",
   "license": "ISC",

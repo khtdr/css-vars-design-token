@@ -1,38 +1,37 @@
 import * as React from 'react';
 
+type Theme = 'dark' | 'light';
+
 interface DesignToken {
   [key: string]: string | number | DesignToken;
 }
 
-type CssVarsContextType = {
-  theme: 'dark' | 'light';
-  themes: Record<'dark' | 'light', DesignToken>;
+type CssVarsDesignTokenContextType = {
+  theme: Theme;
+  themes: Record<Theme, DesignToken>;
   token: DesignToken;
-  setTheme: (theme: 'dark' | 'light') => void;
+  setTheme: (theme: Theme) => void;
 };
 
-const CssVarsContext = React.createContext({} as CssVarsContextType);
+const CssVarsDesignTokenContext = React.createContext(
+  {} as CssVarsDesignTokenContextType,
+);
 
-export const useDesignToken = <Token extends DesignToken>(): Token => {
-  const context = React.useContext(CssVarsContext);
-  if (!context) {
-    throw new Error('useDesignToken must be used within a CssVarsProvider');
-  }
-  return context.token as Token;
-};
+export function useCssVarsDesignTokenContext<Token extends DesignToken>() {
+  const context = React.useContext(CssVarsDesignTokenContext);
+  if (!context)
+    throw new Error(
+      'useCssVarsDesignTokenContext must be used within a CssVarsDesignTokenProvider',
+    );
 
-export const useCssTheme = () => {
-  const context = React.useContext(CssVarsContext);
-  if (!context) {
-    throw new Error('useCssTheme must be used within a CssVarsProvider');
-  }
   const setTheme = React.useCallback(
-    (theme: 'dark' | 'light' | 'auto') => {
+    (theme: Theme | 'auto') => {
       if (theme === 'auto') {
-        const prefersDark = window.matchMedia(
-          '(prefers-color-scheme: dark)',
-        ).matches;
-        context.setTheme(prefersDark ? 'dark' : 'light');
+        context.setTheme(
+          window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light',
+        );
       } else {
         context.setTheme(theme);
       }
@@ -42,24 +41,34 @@ export const useCssTheme = () => {
   const toggle = React.useCallback(() => {
     setTheme(context.theme === 'dark' ? 'light' : 'dark');
   }, [context.theme, setTheme]);
-  return { theme: context.theme, setTheme, toggle };
-};
+  return {
+    theme: context.theme,
+    setTheme,
+    toggle,
+    token: context.token as Token,
+  };
+}
 
-export const CssVarsProvider = ({
+export const CssVarsDesignTokenProvider = ({
   children,
   themes,
   style,
 }: React.PropsWithChildren<{
-  themes: CssVarsContextType['themes'];
+  themes: CssVarsDesignTokenContextType['themes'];
   style?: React.CSSProperties;
 }>) => {
   type Theme = keyof typeof themes;
   const [theme, setTheme] = React.useState(Object.keys(themes)[0] as Theme);
   const token: DesignToken =
     themes[theme] || themes[Object.keys(themes)[0] as Theme];
-  const value = { themes, token, theme, setTheme } as CssVarsContextType;
+  const value = {
+    themes,
+    token,
+    theme,
+    setTheme,
+  } as CssVarsDesignTokenContextType;
   return (
-    <CssVarsContext.Provider value={value}>
+    <CssVarsDesignTokenContext.Provider value={value}>
       <div
         style={{
           height: 'inherit',
@@ -70,7 +79,7 @@ export const CssVarsProvider = ({
       >
         {children}
       </div>
-    </CssVarsContext.Provider>
+    </CssVarsDesignTokenContext.Provider>
   );
 };
 
