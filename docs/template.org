@@ -59,7 +59,11 @@ h1 {
 #+END_SRC
 
 ** Installation
-To use CssVarsDesignToken in your project, you need to have installed the following peer dependencies:
+#+BEGIN_SRC sh :exports code :results raw
+npm install --save css-vars-design-token
+#+END_SRC
+
+To use =CssVarsDesignToken= in your project, you need to have installed the following peer dependencies:
 
 - =react= Any recent version will do.
 
@@ -73,15 +77,11 @@ Ensure that you have these dependencies included in your project.
      - =themes=: An object containing theme configurations, where each key represents a theme name and the value is a DesignToken object.
      - =style= (optional): Additional CSS styles to apply to the root element.
 
-2. **useDesignToken**
-   - Custom hook to access design tokens from the context.
+2. **useCssVarsDesignToken**
+   - Custom hook to access design tokens from the context and to manage themes and toggle between them.
    - Should be used within a component wrapped by =CssVarsDesignTokenProvider=.
 
-3. **useCssTheme**
-   - Custom hook to manage themes and toggle between them.
-   - Should be used within a component wrapped by =CssVarsDesignTokenProvider=.
-
-4. **toCssVarsDesignToken**
+3. **toCssVarsDesignToken**
    - Utility function to convert DesignToken objects into CSS variable format.
 
 *** Example 1: Simple Usage

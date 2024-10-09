@@ -1,22 +1,22 @@
-- [Css-Vars Design Token Documentation](#org499176b)
-  - [Introduction](#org897408d)
-  - [Installation](#orga2b3d8f)
-  - [Usage](#org325d2d1)
-    - [Example 1: Simple Usage](#org310844b)
-    - [Example 2: Nested DesignToken Usage](#orga9b3a44)
-- [Test and code coverage reports](#orga38fc9a)
-- [Development & Contributing](#orgbdf7732)
+- [Css-Vars Design Token Documentation](#org2d08257)
+  - [Introduction](#org4b4d524)
+  - [Installation](#orge75bb81)
+  - [Usage](#orgd68c504)
+    - [Example 1: Simple Usage](#org45bac93)
+    - [Example 2: Nested DesignToken Usage](#org4c8fe9a)
+- [Test and code coverage reports](#org23f50ab)
+- [Development & Contributing](#org9ce0dd1)
 
 
 
-<a id="org499176b"></a>
+<a id="org2d08257"></a>
 
 # Css-Vars Design Token Documentation
 
 `CssVarsDesignToken` simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme selection. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
 
 
-<a id="org897408d"></a>
+<a id="org4b4d524"></a>
 
 ## Introduction
 
@@ -76,18 +76,22 @@ h1 {
 ```
 
 
-<a id="orga2b3d8f"></a>
+<a id="orge75bb81"></a>
 
 ## Installation
 
-To use CssVarsDesignToken in your project, you need to have installed the following peer dependencies:
+```sh
+npm install --save css-vars-design-token
+```
+
+To use `CssVarsDesignToken` in your project, you need to have installed the following peer dependencies:
 
 -   `react` Any recent version will do.
 
 Ensure that you have these dependencies included in your project.
 
 
-<a id="org325d2d1"></a>
+<a id="orgd68c504"></a>
 
 ## Usage
 
@@ -97,19 +101,15 @@ Ensure that you have these dependencies included in your project.
         -   `themes`: An object containing theme configurations, where each key represents a theme name and the value is a DesignToken object.
         -   `style` (optional): Additional CSS styles to apply to the root element.
 
-2.  ****useDesignToken****
-    -   Custom hook to access design tokens from the context.
+2.  ****useCssVarsDesignToken****
+    -   Custom hook to access design tokens from the context and to manage themes and toggle between them.
     -   Should be used within a component wrapped by `CssVarsDesignTokenProvider`.
 
-3.  ****useCssTheme****
-    -   Custom hook to manage themes and toggle between them.
-    -   Should be used within a component wrapped by `CssVarsDesignTokenProvider`.
-
-4.  ****toCssVarsDesignToken****
+3.  ****toCssVarsDesignToken****
     -   Utility function to convert DesignToken objects into CSS variable format.
 
 
-<a id="org310844b"></a>
+<a id="org45bac93"></a>
 
 ### Example 1: Simple Usage
 
@@ -152,7 +152,7 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
 ```
 
 
-<a id="orga9b3a44"></a>
+<a id="org4c8fe9a"></a>
 
 ### Example 2: Nested DesignToken Usage
 
@@ -203,21 +203,21 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
 ```
 
 
-<a id="orga38fc9a"></a>
+<a id="org23f50ab"></a>
 
 # Test and code coverage reports
 
 ```
 
-> css-vars-design-token@1.1.0 test:coverage
+> css-vars-design-token@1.1.1 test:coverage
 > jest --coverage
 
 PASS ./test.tsx
   Function toCssVars
     ✓ toCssVars returns the expected flat list of css vars (2 ms)
   React integrations
-    ✓ Computed style matches the expectation from the token (15 ms)
-    ✓ Computed style matches the other theme upon toggling (7 ms)
+    ✓ Computed style matches the expectation from the token (17 ms)
+    ✓ Computed style matches the other theme upon toggling (8 ms)
 
 ---------------------------|---------|----------|---------|---------|-------------------
 File                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
@@ -228,12 +228,12 @@ All files                  |   88.46 |    42.85 |   83.33 |      88 |
 Test Suites: 1 passed, 1 total
 Tests:       3 passed, 3 total
 Snapshots:   0 total
-Time:        1.059 s
+Time:        3.153 s
 Ran all test suites.
 ```
 
 
-<a id="orgbdf7732"></a>
+<a id="org9ce0dd1"></a>
 
 # Development & Contributing
 
