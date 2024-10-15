@@ -1,3 +1,4 @@
+demo.html linguist-documentation
 dist/** linguist-generated
 coverage/** linguist-documentation
 eslint.config.mjs linguist-vendored
