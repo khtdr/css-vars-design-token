@@ -1,22 +1,22 @@
-- [Css-Vars Design Token Documentation](#org2d08257)
-  - [Introduction](#org4b4d524)
-  - [Installation](#orge75bb81)
-  - [Usage](#orgd68c504)
-    - [Example 1: Simple Usage](#org45bac93)
-    - [Example 2: Nested DesignToken Usage](#org4c8fe9a)
-- [Test and code coverage reports](#org23f50ab)
-- [Development & Contributing](#org9ce0dd1)
+- [Css-Vars Design Token Documentation](#orgb49fd11)
+  - [Introduction](#org59efcea)
+  - [Installation](#org7406b1f)
+  - [Usage](#orgfba7399)
+    - [Example 1: Simple Usage](#org4917214)
+    - [Example 2: Structured DesignToken Usage](#org2d84413)
+- [Test and code coverage reports](#org1f2e528)
+- [Development & Contributing](#org9a19d32)
 
 
 
-<a id="org2d08257"></a>
+<a id="orgb49fd11"></a>
 
 # Css-Vars Design Token Documentation
 
 `CssVarsDesignToken` simplifies theme management in React applications by leveraging CSS variables and providing hooks for theme selection. By following the provided guidelines, you can easily integrate design tokens and themes into your components for consistent styling.
 
 
-<a id="org4b4d524"></a>
+<a id="org59efcea"></a>
 
 ## Introduction
 
@@ -76,7 +76,7 @@ h1 {
 ```
 
 
-<a id="orge75bb81"></a>
+<a id="org7406b1f"></a>
 
 ## Installation
 
@@ -91,7 +91,7 @@ To use `CssVarsDesignToken` in your project, you need to have installed the foll
 Ensure that you have these dependencies included in your project.
 
 
-<a id="orgd68c504"></a>
+<a id="orgfba7399"></a>
 
 ## Usage
 
@@ -109,7 +109,7 @@ Ensure that you have these dependencies included in your project.
     -   Utility function to convert DesignToken objects into CSS variable format.
 
 
-<a id="org45bac93"></a>
+<a id="org4917214"></a>
 
 ### Example 1: Simple Usage
 
@@ -152,11 +152,11 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
 ```
 
 
-<a id="org4c8fe9a"></a>
+<a id="org2d84413"></a>
 
-### Example 2: Nested DesignToken Usage
+### Example 2: Structured DesignToken Usage
 
-Here is an example demonstrating the nested nature of DesignToken for more complex theming:
+Here is an example using the deeply-structured nature of the Design Token for more complex theming:
 
 ```html
 <html>
@@ -172,7 +172,7 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      function NestedThemeComponent() {
+      function StructuredThemeComponent() {
         const { theme, toggle } = useCssTheme();
         return (
           <div>
@@ -194,7 +194,7 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
             }
           }}
         >
-          <NestedThemeComponent />
+          <StructuredThemeComponent />
         </CssVarsDesignTokenProvider>
       );
     </script>
@@ -203,37 +203,37 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
 ```
 
 
-<a id="org23f50ab"></a>
+<a id="org1f2e528"></a>
 
 # Test and code coverage reports
 
 ```
 
-> css-vars-design-token@1.1.1 test:coverage
+> css-vars-design-token@1.2.0 test:coverage
 > jest --coverage
 
 PASS ./test.tsx
   Function toCssVars
-    ✓ toCssVars returns the expected flat list of css vars (2 ms)
+    ✓ toCssVars returns the expected flat list of css vars (1 ms)
   React integrations
-    ✓ Computed style matches the expectation from the token (17 ms)
+    ✓ Computed style matches the expectation from the token (13 ms)
     ✓ Computed style matches the other theme upon toggling (8 ms)
 
 ---------------------------|---------|----------|---------|---------|-------------------
 File                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ---------------------------|---------|----------|---------|---------|-------------------
-All files                  |   88.46 |    42.85 |   83.33 |      88 |                   
- css-vars-design-token.tsx |   88.46 |    42.85 |   83.33 |      88 | 23,30,42          
+All files                  |   92.85 |       65 |     100 |   92.59 |                   
+ css-vars-design-token.tsx |   92.85 |       65 |     100 |   92.59 | 23,30             
 ---------------------------|---------|----------|---------|---------|-------------------
 Test Suites: 1 passed, 1 total
 Tests:       3 passed, 3 total
 Snapshots:   0 total
-Time:        3.153 s
+Time:        1.635 s
 Ran all test suites.
 ```
 
 
-<a id="org9ce0dd1"></a>
+<a id="org9a19d32"></a>
 
 # Development & Contributing
 

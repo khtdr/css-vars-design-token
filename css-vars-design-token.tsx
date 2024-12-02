@@ -27,11 +27,7 @@ export function useCssVarsDesignTokenContext<Token extends DesignToken>() {
   const setTheme = React.useCallback(
     (theme: Theme | 'auto') => {
       if (theme === 'auto') {
-        context.setTheme(
-          window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? 'dark'
-            : 'light',
-        );
+        context.setTheme(getPreferredTheme());
       } else {
         context.setTheme(theme);
       }
@@ -52,23 +48,24 @@ export function useCssVarsDesignTokenContext<Token extends DesignToken>() {
 export const CssVarsDesignTokenProvider = ({
   children,
   themes,
+  theme: initial,
   style,
 }: React.PropsWithChildren<{
   themes: CssVarsDesignTokenContextType['themes'];
+  theme?: Theme;
   style?: React.CSSProperties;
 }>) => {
-  type Theme = keyof typeof themes;
-  const [theme, setTheme] = React.useState(Object.keys(themes)[0] as Theme);
-  const token: DesignToken =
-    themes[theme] || themes[Object.keys(themes)[0] as Theme];
-  const value = {
-    themes,
-    token,
-    theme,
-    setTheme,
-  } as CssVarsDesignTokenContextType;
+  const [theme, setTheme] = React.useState(initial || getPreferredTheme());
+  const token: DesignToken = themes[theme];
   return (
-    <CssVarsDesignTokenContext.Provider value={value}>
+    <CssVarsDesignTokenContext.Provider
+      value={{
+        themes,
+        token,
+        theme,
+        setTheme,
+      }}
+    >
       <div
         style={{
           height: 'inherit',
@@ -100,3 +97,8 @@ export function toCssVars(
     {} as Record<string, string | number>,
   );
 }
+
+const getPreferredTheme = () => {
+  const fn = window?.matchMedia;
+  return fn && fn('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};

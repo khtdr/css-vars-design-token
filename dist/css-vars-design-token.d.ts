@@ -15,8 +15,9 @@ export declare function useCssVarsDesignTokenContext<Token extends DesignToken>(
     toggle: () => void;
     token: Token;
 };
-export declare const CssVarsDesignTokenProvider: ({ children, themes, style, }: React.PropsWithChildren<{
+export declare const CssVarsDesignTokenProvider: ({ children, themes, theme: initial, style, }: React.PropsWithChildren<{
     themes: CssVarsDesignTokenContextType["themes"];
+    theme?: Theme;
     style?: React.CSSProperties;
 }>) => React.JSX.Element;
 export declare function toCssVars(obj: DesignToken, parentKey?: string): Record<string, string | number>;

@@ -123,8 +123,8 @@ Here is a simple example demonstrating the usage of CssVarsDesignToken with basi
 </html>
 #+END_SRC
 
-*** Example 2: Nested DesignToken Usage
-Here is an example demonstrating the nested nature of DesignToken for more complex theming:
+*** Example 2: Structured DesignToken Usage
+Here is an example using the deeply-structured nature of the Design Token for more complex theming:
 
 #+BEGIN_SRC html :exports code :results raw
 <html>
@@ -140,7 +140,7 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      function NestedThemeComponent() {
+      function StructuredThemeComponent() {
         const { theme, toggle } = useCssTheme();
         return (
           <div>
@@ -162,7 +162,7 @@ Here is an example demonstrating the nested nature of DesignToken for more compl
             }
           }}
         >
-          <NestedThemeComponent />
+          <StructuredThemeComponent />
         </CssVarsDesignTokenProvider>
       );
     </script>

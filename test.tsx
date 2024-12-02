@@ -44,7 +44,7 @@ describe('React integrations', () => {
         <TestComponent />
       </CssVarsDesignTokenProvider>,
     );
-    expect(getByTestId('token-name').textContent).toBe(DARK_THEME.name);
+    expect(getByTestId('token-name').textContent).toBe(LIGHT_THEME.name);
   });
 
   test('Computed style matches the other theme upon toggling', () => {
@@ -54,27 +54,18 @@ describe('React integrations', () => {
     };
 
     const TestComponent = () => {
-      const { token, setTheme } =
-        useCssVarsDesignTokenContext<TestThemeToken>();
+      const { token, toggle } = useCssVarsDesignTokenContext<TestThemeToken>();
 
       return (
         <>
           <div data-testid="token-name">{token.name}</div>
-          <button
-            onClick={() => {
-              act(() => {
-                setTheme('light');
-              });
-            }}
-          >
-            Light Theme
-          </button>
+          <button onClick={() => act(() => toggle())}>Light Theme</button>
         </>
       );
     };
 
     const { getByTestId, getByText } = render(
-      <CssVarsDesignTokenProvider themes={themes}>
+      <CssVarsDesignTokenProvider themes={themes} theme="dark">
         <TestComponent />
       </CssVarsDesignTokenProvider>,
     );
