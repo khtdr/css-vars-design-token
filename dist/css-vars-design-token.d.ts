@@ -8,11 +8,10 @@ type CssVarsDesignTokenContextType = {
     themes: Record<Theme, DesignToken>;
     token: DesignToken;
     setTheme: (theme: Theme) => void;
-};
-export declare function useCssVarsDesignTokenContext<Token extends DesignToken>(): {
-    theme: Theme;
-    setTheme: (theme: Theme | "auto") => void;
     toggle: () => void;
+    mod: (name: string, value?: string | number) => void;
+};
+export declare function useCssVarsDesignTokenContext<Token extends DesignToken>(): CssVarsDesignTokenContextType & {
     token: Token;
 };
 export declare const CssVarsDesignTokenProvider: ({ children, themes, theme: initial, style, }: React.PropsWithChildren<{
@@ -21,4 +20,10 @@ export declare const CssVarsDesignTokenProvider: ({ children, themes, theme: ini
     style?: React.CSSProperties;
 }>) => React.JSX.Element;
 export declare function toCssVars(obj: DesignToken, parentKey?: string): Record<string, string | number>;
+declare function dottedSetter(object: DesignToken, path: string, value: number | string): DesignToken;
+declare function dottedLookup(object: DesignToken, path: string, defaultValue?: number | string): string | number | DesignToken;
+export declare const __internal__: {
+    dottedLookup: typeof dottedLookup;
+    dottedSetter: typeof dottedSetter;
+};
 export {};

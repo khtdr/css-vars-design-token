@@ -11,38 +11,18 @@ type CssVarsDesignTokenContextType = {
   themes: Record<Theme, DesignToken>;
   token: DesignToken;
   setTheme: (theme: Theme) => void;
+  toggle: () => void;
+  mod: (name: string, value?: string | number) => void;
 };
 
-const CssVarsDesignTokenContext = React.createContext(
-  {} as CssVarsDesignTokenContextType,
-);
+const CssVarsDesignTokenContext = React.createContext<
+  CssVarsDesignTokenContextType | undefined
+>(undefined);
 
 export function useCssVarsDesignTokenContext<Token extends DesignToken>() {
   const context = React.useContext(CssVarsDesignTokenContext);
-  if (!context)
-    throw new Error(
-      'useCssVarsDesignTokenContext must be used within a CssVarsDesignTokenProvider',
-    );
-
-  const setTheme = React.useCallback(
-    (theme: Theme | 'auto') => {
-      if (theme === 'auto') {
-        context.setTheme(getPreferredTheme());
-      } else {
-        context.setTheme(theme);
-      }
-    },
-    [context.setTheme],
-  );
-  const toggle = React.useCallback(() => {
-    setTheme(context.theme === 'dark' ? 'light' : 'dark');
-  }, [context.theme, setTheme]);
-  return {
-    theme: context.theme,
-    setTheme,
-    toggle,
-    token: context.token as Token,
-  };
+  if (!context) throw new Error('no context found for CssVarsDesignToken');
+  return context as typeof context & { token: Token };
 }
 
 export const CssVarsDesignTokenProvider = ({
@@ -55,15 +35,46 @@ export const CssVarsDesignTokenProvider = ({
   theme?: Theme;
   style?: React.CSSProperties;
 }>) => {
-  const [theme, setTheme] = React.useState(initial || getPreferredTheme());
-  const token: DesignToken = themes[theme];
+  const [theme, dispatchThemeSetter] = React.useState(
+    initial || getPreferredTheme(),
+  );
+
+  const [mods, setMods] = React.useState<Record<string, string | number>>({});
+  const token: DesignToken = React.useMemo(() => {
+    const clone = JSON.parse(JSON.stringify(themes[theme]));
+    Object.keys(mods).forEach((key) => {
+      const modValue = mods[key];
+      if (modValue !== undefined) dottedSetter(clone, key, mods[key]);
+    });
+    return clone;
+  }, [themes, theme, mods]);
+
+  const setTheme = React.useCallback(
+    (theme: Theme | 'auto') =>
+      dispatchThemeSetter(theme === 'auto' ? getPreferredTheme() : theme),
+    [dispatchThemeSetter],
+  );
+
+  const toggle = React.useCallback(() => {
+    dispatchThemeSetter(theme === 'dark' ? 'light' : 'dark');
+  }, [theme, dispatchThemeSetter]);
+
+  const mod = React.useCallback(
+    (name: string, value: string | number | undefined) => {
+      setMods((prev) => ({ ...prev, [name]: value }));
+    },
+    [setMods],
+  );
+
   return (
     <CssVarsDesignTokenContext.Provider
       value={{
         themes,
         token,
         theme,
+        toggle,
         setTheme,
+        mod,
       }}
     >
       <div
@@ -98,7 +109,46 @@ export function toCssVars(
   );
 }
 
+function dottedSetter(
+  object: DesignToken,
+  path: string,
+  value: number | string,
+) {
+  const pathArray = Array.isArray(path) ? path : path.split('.');
+  let currentObject = object;
+  for (let i = 0; i < pathArray.length - 1; i++) {
+    const key = pathArray[i];
+    if (!currentObject.hasOwnProperty(key)) {
+      currentObject[key] = {};
+    }
+    currentObject = currentObject[key] as DesignToken;
+  }
+  currentObject[pathArray[pathArray.length - 1]] = value;
+  return object;
+}
+
+function dottedLookup(
+  object: DesignToken,
+  path: string,
+  defaultValue: number | string = undefined,
+) {
+  const pathArray = Array.isArray(path) ? path : path.split('.');
+  if (!object) return defaultValue;
+  let currentObject: DesignToken | typeof defaultValue = object;
+  for (let i = 0; i < pathArray.length; i++) {
+    if (typeof currentObject !== 'object') return defaultValue;
+    currentObject = currentObject[pathArray[i]] as typeof currentObject;
+    if (currentObject === undefined) currentObject = defaultValue;
+  }
+  return currentObject;
+}
+
 const getPreferredTheme = () => {
   const fn = window?.matchMedia;
   return fn && fn('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
+export const __internal__ = {
+  dottedLookup,
+  dottedSetter,
 };
